@@ -4,6 +4,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { ProjectMediaGrid } from "@/components/ProjectMediaGrid";
 import { ProjectRichTextCollapse } from "@/components/ProjectRichTextCollapse";
 import { sortProjectsForFeed } from "@/lib/projectOrder";
+import { withBasePath } from "@/lib/sitePath";
 import { displayTagLabel } from "@/lib/tagDisplay";
 import { getProjects } from "@/lib/storage";
 
@@ -57,6 +58,15 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects
+    .filter((item) => item.published && !item.archived && item.detailsEnabled)
+    .map((project) => ({ slug: project.slug }));
+}
+
+export const dynamicParams = false;
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const projects = await getProjects();
@@ -81,7 +91,7 @@ export default async function ProjectPage({ params }: Props) {
           {isVideoPreview(project.preview) ? (
             <video
               className="projectHeroPreviewMedia"
-              src={project.preview}
+              src={withBasePath(project.preview)}
               autoPlay
               muted
               loop
@@ -92,7 +102,7 @@ export default async function ProjectPage({ params }: Props) {
           ) : (
             <img
               className="projectHeroPreviewMedia"
-              src={project.preview}
+              src={withBasePath(project.preview)}
               alt={project.title}
               fetchPriority="high"
             />
@@ -135,7 +145,7 @@ export default async function ProjectPage({ params }: Props) {
                     {isVideoPreview(item.preview) ? (
                       <video
                         className="projectNearbyMedia"
-                        src={item.preview}
+                        src={withBasePath(item.preview)}
                         autoPlay
                         muted
                         loop
@@ -144,7 +154,7 @@ export default async function ProjectPage({ params }: Props) {
                         aria-hidden
                       />
                     ) : (
-                      <img className="projectNearbyMedia" src={item.preview} alt={item.title} loading="lazy" />
+                      <img className="projectNearbyMedia" src={withBasePath(item.preview)} alt={item.title} loading="lazy" />
                     )}
                     <span className="projectNearbyTitle">{item.title}</span>
                   </Link>

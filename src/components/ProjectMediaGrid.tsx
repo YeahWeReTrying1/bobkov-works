@@ -10,6 +10,7 @@ import {
   useState
 } from "react";
 import { CardReveal } from "@/components/CardReveal";
+import { withBasePath } from "@/lib/sitePath";
 import { MediaItem } from "@/lib/types";
 
 const LIGHTBOX_SWIPE_PX = 56;
@@ -241,7 +242,7 @@ export function ProjectMediaGrid({ media, title }: Props) {
                 <video
                   className="projectMedia"
                   controls
-                  src={item.src}
+                  src={withBasePath(item.src)}
                   preload="metadata"
                   onLoadedMetadata={(event) =>
                     setOrientation(item.id, event.currentTarget.videoWidth, event.currentTarget.videoHeight)
@@ -256,7 +257,7 @@ export function ProjectMediaGrid({ media, title }: Props) {
                 >
                   <img
                     className="projectMedia"
-                    src={item.src}
+                    src={withBasePath(item.src)}
                     alt={item.caption || title}
                     loading="lazy"
                     onLoad={(event) =>
@@ -295,7 +296,7 @@ export function ProjectMediaGrid({ media, title }: Props) {
           </button>
           <img
             className={`projectLightboxImage ${zoom.closing ? "isClosing" : ""}`}
-            src={imageItems[zoom.index]?.src}
+            src={withBasePath(imageItems[zoom.index]?.src || "")}
             alt={imageItems[zoom.index]?.alt}
             style={{
               top: zoom.rect.top,

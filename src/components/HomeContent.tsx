@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { type MouseEvent, startTransition, useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { type MouseEvent, startTransition, useMemo, useState, useTransition } from "react";
 import { CardReveal } from "@/components/CardReveal";
 import { FlowFeed } from "@/components/FlowFeed";
 import { ProjectMediaCarousel } from "@/components/ProjectMediaCarousel";
 import { SiteNav } from "@/components/SiteNav";
-import { displayTagLabel } from "@/lib/tagDisplay";
-import type { Project } from "@/lib/types";
+import { displayTagLabel, projectMatchesNavTag } from "@/lib/tagDisplay";
+import { withBasePath } from "@/lib/sitePath";
+import { TAGS, type Project } from "@/lib/types";
 
 function getCardDescription(description?: string) {
   if (!description) return "";
@@ -33,15 +34,31 @@ function getPreviewKind(src: string): "image" | "gif" | "video" {
 }
 
 type Props = {
-  activeTag: string;
   projects: Project[];
 };
 
-export function HomeContent({ activeTag, projects }: Props) {
+const ALLOWED_TAGS = new Set<string>(TAGS.filter((t) => t !== "flow"));
+/** Старые ссылки ?tag=иконки|логотипы|шрифты ведут в рубрику «графика». */
+const LEGACY_GRAPHICS_TAGS = new Set(["иконки", "логотипы", "шрифты"]);
+
+export function HomeContent({ projects }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [showCaptions, setShowCaptions] = useState(true);
   const [navTargetSlug, setNavTargetSlug] = useState<string | null>(null);
   const [, startTransition] = useTransition();
+
+  const activeTag = useMemo(() => {
+    const rawTag = searchParams.get("tag") || "flow";
+    if (rawTag !== "flow" && LEGACY_GRAPHICS_TAGS.has(rawTag)) return "графика";
+    if (ALLOWED_TAGS.has(rawTag) || rawTag === "flow") return rawTag;
+    return "flow";
+  }, [searchParams]);
+
+  const visibleProjects = useMemo(
+    () => (activeTag === "flow" ? projects : projects.filter((project) => projectMatchesNavTag(project.tag, activeTag))),
+    [activeTag, projects]
+  );
 
   const isFlow = activeTag === "flow";
 
@@ -105,11 +122,11 @@ export function HomeContent({ activeTag, projects }: Props) {
             <div className="flowBackdropStack">
               <div
                 className="flowBackdropLayer flowBackdropLayerBase"
-                style={{ backgroundImage: "url(/flow-portrait-me.png)" }}
+                style={{ backgroundImage: `url(${withBasePath("/flow-portrait-me.png")})` }}
               />
               <div
                 className="flowBackdropLayer flowBackdropLayerBloom"
-                style={{ backgroundImage: "url(/flow-portrait-me.png)" }}
+                style={{ backgroundImage: `url(${withBasePath("/flow-portrait-me.png")})` }}
               />
             </div>
             <div className="flowBackdropNoise" />
@@ -119,7 +136,7 @@ export function HomeContent({ activeTag, projects }: Props) {
           <div className="flowMainInner">
             <h1 className="srOnly pageTitle">Flow</h1>
             <FlowFeed
-              projects={projects}
+              projects={visibleProjects}
               showCaptions={showCaptions}
               isNavigating={isNavigating}
               navTargetSlug={navTargetSlug}
@@ -131,7 +148,7 @@ export function HomeContent({ activeTag, projects }: Props) {
           <>
             <h1 className="pageTitle">{activeTag}</h1>
             <section className={gridClass}>
-              {projects.map((project) => (
+              {visibleProjects.map((project) => (
                 <CardReveal
                   key={`${activeTag}-${project.id}`}
                   className={[
@@ -163,7 +180,7 @@ export function HomeContent({ activeTag, projects }: Props) {
                             {isVideoPreview(project.preview) ? (
                               <video
                                 className="cardMedia"
-                                src={project.preview}
+                                src={withBasePath(project.preview)}
                                 autoPlay
                                 loop
                                 muted
@@ -171,7 +188,7 @@ export function HomeContent({ activeTag, projects }: Props) {
                                 preload="metadata"
                               />
                             ) : (
-                              <img className="cardMedia" src={project.preview} alt={project.title} />
+                              <img className="cardMedia" src={withBasePath(project.preview)} alt={project.title} />
                             )}
                           </Link>
                         );
@@ -183,7 +200,7 @@ export function HomeContent({ activeTag, projects }: Props) {
                         return (
                           <video
                             className="cardMedia"
-                            src={project.preview}
+                            src={withBasePath(project.preview)}
                             autoPlay
                             loop
                             muted
@@ -192,7 +209,7 @@ export function HomeContent({ activeTag, projects }: Props) {
                           />
                         );
                       }
-                      return <img className="cardMedia" src={project.preview} alt={project.title} />;
+                      return <img className="cardMedia" src={withBasePath(project.preview)} alt={project.title} />;
                     })()}
                     {showCaptions ? (
                       <div className="cardBody">

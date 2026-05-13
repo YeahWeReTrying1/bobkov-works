@@ -9,6 +9,7 @@ import {
   useRef,
   useState
 } from "react";
+import { withBasePath } from "@/lib/sitePath";
 import { MediaItem } from "@/lib/types";
 
 const SWIPE_PX = 48;
@@ -231,11 +232,11 @@ export function ProjectMediaCarousel({ media, title }: Props) {
             {normalized.map((item) => (
               <div className="mediaCarouselSlide" key={item.id}>
                 {item.kind === "video" ? (
-                  <video className="cardMedia" src={item.src} controls preload="metadata" />
+                  <video className="cardMedia" src={withBasePath(item.src)} controls preload="metadata" />
                 ) : (
                   <img
                     className="cardMedia"
-                    src={item.src}
+                    src={withBasePath(item.src)}
                     alt={title}
                     loading="lazy"
                     onLoad={updateArrowColors}
@@ -276,14 +277,14 @@ export function ProjectMediaCarousel({ media, title }: Props) {
               {item.kind === "video" ? (
                 <video
                   className="carouselThumbMedia"
-                  src={item.src}
+                  src={withBasePath(item.src)}
                   muted
                   playsInline
                   preload="metadata"
                   aria-hidden
                 />
               ) : (
-                <img className="carouselThumbMedia" src={item.src} alt="" loading="lazy" aria-hidden />
+                <img className="carouselThumbMedia" src={withBasePath(item.src)} alt="" loading="lazy" aria-hidden />
               )}
             </button>
           ))}

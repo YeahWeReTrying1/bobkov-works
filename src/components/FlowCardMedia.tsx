@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { MouseEvent } from "react";
+import { withBasePath } from "@/lib/sitePath";
 import type { Project } from "@/lib/types";
 
 function isVideoPreview(src: string) {
@@ -20,7 +21,7 @@ export function FlowCardMedia({ project, prefetchProject, openProjectFromTitle, 
   const media = isVideoPreview(project.preview) ? (
     <video
       className="flowCardMedia"
-      src={project.preview}
+      src={withBasePath(project.preview)}
       autoPlay
       loop
       muted
@@ -29,7 +30,7 @@ export function FlowCardMedia({ project, prefetchProject, openProjectFromTitle, 
       aria-label={project.title}
     />
   ) : (
-    <img className="flowCardMedia" src={project.preview} alt="" />
+    <img className="flowCardMedia" src={withBasePath(project.preview)} alt="" />
   );
 
   const clip = project.detailsEnabled ? (
