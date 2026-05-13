@@ -1,0 +1,58 @@
+"use client";
+
+import Link from "next/link";
+import type { MouseEvent } from "react";
+import type { Project } from "@/lib/types";
+
+function isVideoPreview(src: string) {
+  return /\.(mp4|webm|ogg|mov)$/i.test(src);
+}
+
+type Props = {
+  project: Project;
+  prefetchProject: (slug: string) => void;
+  openProjectFromTitle: (event: MouseEvent<HTMLAnchorElement>, slug: string) => void;
+  /** Мобилка: сторона квадрата превью в px (по умолчанию 121). */
+  tilePx?: number;
+};
+
+export function FlowCardMedia({ project, prefetchProject, openProjectFromTitle, tilePx = 121 }: Props) {
+  const media = isVideoPreview(project.preview) ? (
+    <video
+      className="flowCardMedia"
+      src={project.preview}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      aria-label={project.title}
+    />
+  ) : (
+    <img className="flowCardMedia" src={project.preview} alt="" />
+  );
+
+  const clip = project.detailsEnabled ? (
+    <Link
+      href={`/projects/${project.slug}`}
+      prefetch
+      onMouseEnter={() => prefetchProject(project.slug)}
+      onClick={(event) => openProjectFromTitle(event, project.slug)}
+      className="flowCardMediaLink"
+    >
+      {media}
+    </Link>
+  ) : (
+    media
+  );
+
+  const clipSize = { width: tilePx, height: tilePx, maxWidth: tilePx } as const;
+
+  return (
+    <div className="flowCardFrame" style={{ width: tilePx, maxWidth: tilePx }}>
+      <div className="flowCardMediaClip" style={clipSize}>
+        {clip}
+      </div>
+    </div>
+  );
+}

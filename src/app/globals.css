@@ -1,0 +1,1521 @@
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #555;
+  --border: #dedede;
+  --tag-row-control-h: 32px;
+  --flow-page-bg: #f2f0f3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans", Inter, Arial, sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: none;
+  padding: 0 clamp(14px, 3.5vw, 32px);
+  margin: 0 auto;
+}
+
+.topNav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(247, 247, 245, 0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+
+.topNavInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px 16px;
+  padding: 8px clamp(14px, 3.5vw, 32px);
+}
+
+.topNavLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.topNavLink {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #8a8a8a;
+}
+
+.topNavLink:hover {
+  color: #111;
+}
+
+.tagRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.tagRowDesktop {
+  margin-left: auto;
+}
+
+.tagRow > a.tagButton,
+.tagRow > .captionIosSwitch {
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.tagButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--tag-row-control-h);
+  min-height: var(--tag-row-control-h);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1;
+  color: #8a8a8a;
+  font-weight: 400;
+}
+
+.tagButton:hover {
+  color: #111;
+}
+
+.tagButton.active {
+  background: transparent;
+  color: #000;
+  font-weight: 600;
+}
+
+.tagNavMobile {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.tagNavMobileBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.tagNavMobileTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--tag-row-control-h);
+  padding: 0 8px;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  color: #8a8a8a;
+  cursor: pointer;
+  width: auto;
+}
+
+.tagNavMobileTrigger:hover {
+  color: #111;
+}
+
+.tagNavMobileChevron {
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.tagNavMobilePanel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: min(280px, calc(100vw - 48px));
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.tagNavMobilePanel.isOpen {
+  display: block;
+}
+
+.tagNavMobilePanelInner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+}
+
+.tagNavMobilePanelInner .tagButton {
+  width: 100%;
+  justify-content: flex-start;
+  height: auto;
+  min-height: 36px;
+  padding: 8px 10px;
+}
+
+.captionIosSwitch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 50px;
+  height: var(--tag-row-control-h);
+  min-height: var(--tag-row-control-h);
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  line-height: 0;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.captionIosTrack {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #e9e9eb;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: background 0.22s ease;
+}
+
+.captionIosSwitchOn .captionIosTrack {
+  background: #111;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.captionIosKnob {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.18),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.captionIosSwitchOn .captionIosKnob {
+  transform: translate(18px, -50%);
+}
+
+.captionIosKnobLetters {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: #222;
+  letter-spacing: -0.06em;
+  user-select: none;
+}
+
+.captionIosKnobLower {
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.88;
+}
+
+.grid {
+  column-count: 3;
+  column-gap: 24px;
+  column-fill: balance;
+  margin: 24px 0 40px;
+}
+
+/* Flow: мозаика — позиции в JS (12 колонок, зазор 8px); секция — блок без CSS-grid колонок */
+.grid.flowGrid {
+  display: block;
+  column-count: unset;
+  column-gap: unset;
+  column-fill: unset;
+  margin: 10px 0 40px;
+}
+
+.grid.flowGrid > .cardReveal {
+  break-inside: unset;
+  page-break-inside: unset;
+  -webkit-column-break-inside: unset;
+  margin-bottom: 0;
+}
+
+.flowMosaicRoot {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.flowMosaicRootDesktop {
+  min-height: 320px;
+  overflow: visible;
+}
+
+.flowMosaicCardHostWide {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.flowMosaicCardHostWide:active {
+  cursor: grabbing;
+}
+
+.flowMosaicRootMobile {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  padding: 8px 0 28px;
+}
+
+.flowMosaicItem {
+  margin: 0;
+}
+
+.grid.flowGrid .flowMosaicRootDesktop .flowCardFrame {
+  width: 121px;
+  max-width: 121px;
+}
+
+.grid.flowGrid .flowMosaicRootDesktop .flowCardMediaClip {
+  width: 121px;
+  height: 121px;
+  aspect-ratio: auto;
+}
+
+.grid > .cardReveal {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: 24px;
+  transition:
+    transform 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.flowMain {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  padding: clamp(14px, 2vw, 22px) clamp(18px, 3.2vw, 32px) clamp(36px, 5vw, 56px);
+  margin: 0 auto;
+  min-height: calc(100svh - 72px);
+  isolation: isolate;
+  background: var(--flow-page-bg);
+}
+
+.flowBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--flow-page-bg);
+}
+
+/* Фиксированный фон: два слоя размытия (разная интенсивность по маске) + зерно */
+.flowBackdropStack {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--flow-page-bg);
+}
+
+.flowBackdropLayer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* Портрет: фиксированная высота ~1200px, низ к краю экрана, по горизонтали по центру */
+  background-size: auto 1200px;
+  background-color: transparent;
+  transform: none;
+}
+
+.flowBackdropLayerBase {
+  filter: blur(9px) saturate(0.98) brightness(1.1);
+  opacity: 0.9;
+}
+
+.flowBackdropLayerBloom {
+  filter: blur(18px) saturate(0.94) brightness(1.06);
+  opacity: 0.38;
+  mask-image: radial-gradient(
+    ellipse 50% 48% at 50% 50%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.32) 48%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 50% 48% at 50% 50%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.32) 48%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+}
+
+.flowBackdropNoise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowBackdropLayerBase {
+    filter: blur(8px) saturate(0.96) brightness(1.03);
+    opacity: 0.9;
+  }
+
+  .flowBackdropLayerBloom {
+    filter: blur(14px) saturate(0.94) brightness(1.02);
+    opacity: 0.32;
+  }
+
+  .flowBackdropNoise {
+    opacity: 0.18;
+  }
+}
+
+.flowMainInner {
+  position: relative;
+  z-index: 2;
+}
+
+.flowCard {
+  align-items: center;
+}
+
+/* 8px белая обводка снаружи (outline), не влияет на размер 121×121 */
+.flowCardFrame {
+  width: 100%;
+  outline: 8px solid #ffffff;
+  outline-offset: 0;
+  box-shadow: none;
+}
+
+.flowCardMediaClip {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.flowCardMediaLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flowCardMedia {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flowCardBody {
+  padding: 28px 0 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* iOS-подобная подпись: drop-shadow вместо многослойного text-shadow */
+.flowCardTitle {
+  display: block;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0.5px 0.75px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 1px 1.25px rgba(0, 0, 0, 0.32))
+    drop-shadow(0 2px 3.5px rgba(0, 0, 0, 0.18));
+}
+
+.flowCardTitleLink {
+  color: inherit;
+  text-decoration: none;
+  filter: none;
+}
+
+.flowCardTitleLink:hover {
+  color: #f7f7f7;
+}
+
+.flowCardTitleLink:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cardReveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.44s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.44s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardReveal--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardReveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+}
+
+.cardMedia {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cardBody {
+  padding: 10px 0 0;
+}
+
+.cardTitle {
+  display: block;
+  margin: 0 0 6px;
+  font-weight: 400;
+  color: #000;
+}
+
+.cardTitleLink {
+  color: #000;
+  transition: color 180ms ease;
+}
+
+.cardTitleLink:hover {
+  color: #4a4a4a;
+}
+
+.cardTitleLink:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.cardDescription {
+  margin: 0 0 8px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.cardTag {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(242, 242, 242, 1);
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Уход со страницы: «отдаление» + параллакс (3 колонки — рубрики; не Flow) */
+.grid.gridIsNavigating {
+  perspective: 1320px;
+  perspective-origin: 50% 32%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.grid.gridIsNavigating:not(.flowGrid) > .cardReveal:nth-child(3n + 1) {
+  transform: translate3d(-2.5%, 44px, -100px) scale(0.9);
+  opacity: 0;
+  transition:
+    transform 480ms cubic-bezier(0.2, 0.95, 0.25, 1) 0ms,
+    opacity 440ms cubic-bezier(0.2, 0.95, 0.25, 1) 0ms;
+}
+
+.grid.gridIsNavigating:not(.flowGrid) > .cardReveal:nth-child(3n + 2) {
+  transform: translate3d(0, 56px, -150px) scale(0.86);
+  opacity: 0;
+  transition:
+    transform 500ms cubic-bezier(0.2, 0.95, 0.25, 1) 60ms,
+    opacity 440ms cubic-bezier(0.2, 0.95, 0.25, 1) 60ms;
+}
+
+.grid.gridIsNavigating:not(.flowGrid) > .cardReveal:nth-child(3n) {
+  transform: translate3d(2.5%, 44px, -100px) scale(0.9);
+  opacity: 0;
+  transition:
+    transform 480ms cubic-bezier(0.2, 0.95, 0.25, 1) 120ms,
+    opacity 440ms cubic-bezier(0.2, 0.95, 0.25, 1) 120ms;
+}
+
+/* Flow: две колонки — обёртки .flowMosaicCardHost */
+.grid.flowGrid.gridIsNavigating > .flowMosaicCardHost:nth-child(odd) {
+  transform: translate3d(-2.5%, 44px, -100px) scale(0.9);
+  opacity: 0;
+  transition:
+    transform 480ms cubic-bezier(0.2, 0.95, 0.25, 1) 0ms,
+    opacity 440ms cubic-bezier(0.2, 0.95, 0.25, 1) 0ms;
+}
+
+.grid.flowGrid.gridIsNavigating > .flowMosaicCardHost:nth-child(even) {
+  transform: translate3d(2.5%, 44px, -100px) scale(0.9);
+  opacity: 0;
+  transition:
+    transform 480ms cubic-bezier(0.2, 0.95, 0.25, 1) 60ms,
+    opacity 440ms cubic-bezier(0.2, 0.95, 0.25, 1) 60ms;
+}
+
+/* Активная карточка: долгий рост до размонтирования (после загрузки страницы проекта) */
+.grid.gridIsNavigating:not(.flowGrid) > .cardReveal.cardRevealIsActive {
+  opacity: 1;
+  transition: none;
+  animation: navActivePreviewDeepGrow 36s linear forwards;
+  will-change: transform;
+}
+
+.grid.flowGrid.gridIsNavigating > .flowMosaicCardHost.cardRevealIsActive {
+  opacity: 1;
+  transition: none;
+  animation: navActivePreviewDeepGrow 36s linear forwards;
+  will-change: transform;
+}
+
+@keyframes navActivePreviewDeepGrow {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(0, -28px, 400px) scale(1.58);
+  }
+}
+
+.gridIsNavigating .cardRevealIsActive,
+.gridIsNavigating .flowMosaicCardHost.cardRevealIsActive {
+  z-index: 12;
+  position: relative;
+}
+
+.gridIsNavigating .cardRevealIsBackground,
+.gridIsNavigating .flowMosaicCardHost.cardRevealIsBackground {
+  z-index: 1;
+  position: relative;
+}
+
+.gridIsNavigating .cardRevealIsActive .cardBody,
+.gridIsNavigating .flowMosaicCardHost.cardRevealIsActive .cardBody {
+  opacity: 0;
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid.gridIsNavigating {
+    perspective: none;
+  }
+
+  .grid.gridIsNavigating:not(.flowGrid) > .cardReveal {
+    transform: none !important;
+    opacity: 0 !important;
+    transition:
+      opacity 0.16s ease 0ms,
+      transform 0.16s ease 0ms !important;
+  }
+
+  .grid.flowGrid.gridIsNavigating > .flowMosaicCardHost {
+    transform: none !important;
+    opacity: 0 !important;
+    transition:
+      opacity 0.16s ease 0ms,
+      transform 0.16s ease 0ms !important;
+  }
+
+  .grid.gridIsNavigating:not(.flowGrid) > .cardReveal.cardRevealIsActive {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0 !important;
+    will-change: auto;
+  }
+
+  .grid.flowGrid.gridIsNavigating > .flowMosaicCardHost.cardRevealIsActive {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0 !important;
+    will-change: auto;
+  }
+}
+
+.pageTitle {
+  margin: 26px 0 8px;
+  font-size: clamp(24px, 3.4vw, 30px);
+}
+
+.projectPage {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+/* Белая подложка: наезжает на превью при скролле (превью sticky) */
+.projectBodyOverlap {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-32vh, -14rem, -7rem);
+  padding: clamp(36px, 5.5vw, 56px) clamp(14px, 3.5vw, 32px) 80px;
+  background: #fff;
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.12);
+}
+
+.projectHeroPreview {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  background: transparent;
+  display: block;
+  line-height: 0;
+  transform: none;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+/* Размеры только у медиа: на всю ширину вьюпорта, высота ≥400px, обрезка по кадру — без полос от object-fit:contain */
+.projectHeroPreviewMedia {
+  display: block;
+  width: 100%;
+  height: max(400px, min(55vw, 88vh));
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center center;
+  animation: projectHeroPreviewSettle 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes projectHeroPreviewSettle {
+  from {
+    opacity: 0.88;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectHeroPreviewMedia {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .projectHeroPreview {
+    top: 0;
+  }
+
+  .projectBodyOverlap {
+    margin-top: clamp(-26vh, -10rem, -5rem);
+  }
+}
+
+.projectArticle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 40px);
+  align-items: start;
+  margin: 0 0 8px;
+}
+
+.projectArticleMain {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.projectHero {
+  display: block;
+  margin: 0 0 28px;
+}
+
+.projectBodyOverlap .projectHero {
+  margin-top: 0;
+}
+
+.projectTagRow {
+  margin: 1.75em 0 0;
+}
+
+.projectTitle {
+  margin: 0;
+  font-size: clamp(24px, 3.1vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+.projectDescription {
+  margin: 2em 0 0;
+  max-width: none;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.5;
+  color: #212121;
+}
+
+.projectMedia {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.projectRichTextWrap {
+  margin: 1.2em 0 0;
+}
+
+.projectRichTextWrap .projectRichText {
+  margin: 0;
+}
+
+.projectRichText.projectRichText--collapsed {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+}
+
+.projectRichTextToggle {
+  display: inline-block;
+  margin: 0.65em 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 500;
+  color: #555;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.projectRichTextToggle:hover {
+  color: #111;
+}
+
+.projectRichTextToggle:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.projectRichText {
+  white-space: pre-wrap;
+  margin: 1.2em 0 0;
+  max-width: none;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.1vw, 18px);
+  color: #2a2a2a;
+}
+
+.projectBlocks {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.projectBlock {
+  border: 1px solid #ececec;
+  padding: 14px;
+}
+
+.caption {
+  color: var(--muted);
+  margin: 0 0 28px;
+}
+
+.mediaCarousel {
+  width: 100%;
+  min-width: 0;
+}
+
+.mediaCarouselStage {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.mediaCarouselViewport {
+  position: relative;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.mediaCarouselTrack {
+  display: flex;
+  transition: transform 360ms ease;
+  will-change: transform;
+}
+
+.mediaCarouselSlide {
+  flex: 0 0 100%;
+}
+
+.carouselThumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carouselThumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselThumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #f2f2f2;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 180ms ease;
+}
+
+.carouselThumb:hover {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+
+.carouselThumb:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.carouselThumb.isActive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85), inset 0 0 22px rgba(255, 255, 255, 0.55);
+}
+
+.carouselThumbMedia {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carouselArrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease, color 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.carouselArrowGlyph {
+  display: inline-block;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.carouselArrowGlyphFlip {
+  transform: scaleX(-1);
+}
+
+.carouselArrowPrev {
+  left: 12px;
+  justify-content: flex-start;
+  padding: 0 10px 0 0;
+}
+
+.carouselArrowNext {
+  right: 12px;
+  justify-content: flex-end;
+  padding: 0 0 0 10px;
+}
+
+.carouselArrow:hover {
+  opacity: 0.88;
+}
+
+.carouselArrow:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mediaCarousel .carouselArrow {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mediaCarousel.mediaCarouselPointerLeft .carouselArrowPrev,
+  .mediaCarousel.mediaCarouselPointerRight .carouselArrowNext {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mediaCarousel .carouselArrow:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mediaCarousel .carouselArrow {
+    opacity: 0.85;
+    pointer-events: auto;
+  }
+}
+
+.projectMediaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.projectMediaGrid > .cardReveal.projectMediaCard {
+  min-width: 0;
+}
+
+.projectMediaCard {
+  grid-column: span 1;
+}
+
+.projectMediaCard.isLandscape {
+  grid-column: 1 / -1;
+}
+
+.projectMediaZoomButton {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.projectLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #fff;
+  cursor: zoom-out;
+  touch-action: manipulation;
+}
+
+.projectLightboxImage {
+  position: fixed;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: none;
+  transition:
+    top 260ms cubic-bezier(0.2, 0.82, 0.22, 1),
+    left 260ms cubic-bezier(0.2, 0.82, 0.22, 1),
+    width 260ms cubic-bezier(0.2, 0.82, 0.22, 1),
+    height 260ms cubic-bezier(0.2, 0.82, 0.22, 1),
+    opacity 220ms ease;
+  cursor: zoom-out;
+}
+
+.projectLightboxImage.isClosing {
+  transition-duration: 240ms;
+}
+
+.projectLightboxNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  z-index: 61;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.projectLightboxNavPrev {
+  left: 18px;
+}
+
+.projectLightboxNavNext {
+  right: 18px;
+}
+
+.projectNearbySection {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.projectNearbyHeading {
+  margin: 0 0 14px;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.projectNearby {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projectNearby::-webkit-scrollbar {
+  display: none;
+}
+
+.projectNearbyItem {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #111;
+}
+
+.projectNearbyMedia {
+  display: block;
+  height: 320px;
+  width: auto;
+  max-width: none;
+  object-fit: cover;
+  background: #f1f1f1;
+}
+
+.projectNearbyTitle {
+  display: block;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.projectPager {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid #e8e8e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.projectPagerLink {
+  color: #131313;
+  font-size: 24px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.projectPagerCenter {
+  font-size: 16px;
+  letter-spacing: 0.01em;
+}
+
+.projectPagerLink.isDisabled {
+  color: #b4b4b4;
+}
+
+@keyframes projectLightboxFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes projectLightboxImageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.aboutWrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 70px 16px;
+}
+
+.aboutInner {
+  max-width: 800px;
+  text-align: center;
+}
+
+.aboutPhoto {
+  width: min(400px, 90vw);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.adminPanel {
+  width: min(1080px, 94vw);
+  margin: 24px auto 80px;
+  display: grid;
+  gap: 20px;
+}
+
+.adminCard {
+  border: 1px solid #d9d9d4;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfcfb 100%);
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(16, 16, 16, 0.05);
+}
+
+.cmsLook {
+  grid-template-columns: 1.1fr 1fr;
+  align-items: start;
+}
+
+.adminHero {
+  grid-column: 1 / -1;
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.status.ok {
+  background: #eef9f0;
+  border: 1px solid #bde7c2;
+}
+
+.status.warn {
+  background: #fff5eb;
+  border: 1px solid #ffd9b2;
+}
+
+.projectRow {
+  border-bottom: 1px solid #ecece8;
+  padding: 12px 0;
+}
+
+.mediaAdminList {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mediaAdminRow {
+  border: 1px solid #ecece8;
+  padding: 10px;
+}
+
+.mediaAdminActions {
+  display: flex;
+  gap: 8px;
+}
+
+.mediaAdminActions button {
+  width: auto;
+  margin: 0 0 8px;
+  padding: 6px 10px;
+}
+
+.dangerButton {
+  border-color: #c62828;
+  background: #ffebee;
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font: inherit;
+  margin-bottom: 10px;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.topNav button.captionIosSwitch {
+  width: 50px;
+  margin-bottom: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.topNav button.tagNavMobileTrigger {
+  width: auto;
+  margin-bottom: 0;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    column-count: 2;
+    column-gap: 16px;
+  }
+
+  .grid > .cardReveal {
+    margin-bottom: 16px;
+  }
+
+  .tagRowDesktop {
+    display: none !important;
+  }
+
+  .tagNavMobile {
+    display: flex;
+  }
+
+  .tagNavMobilePanel {
+    min-width: min(320px, calc(100vw - 28px));
+  }
+}
+
+@media (max-width: 800px) {
+  .cmsLook {
+    grid-template-columns: 1fr;
+  }
+
+  .projectMediaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectArticle {
+    grid-template-columns: 1fr;
+  }
+
+  .projectHero {
+    margin-bottom: 22px;
+  }
+
+  .projectDescription {
+    margin-top: 1.4em;
+  }
+
+  .projectPager {
+    margin-top: 26px;
+    gap: 10px;
+  }
+
+  .projectNearbySection {
+    margin-top: 26px;
+  }
+
+  .projectPagerLink {
+    font-size: 22px;
+  }
+
+  .projectPagerCenter {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topNavInner {
+    gap: 8px 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .topNavLinks {
+    gap: 10px;
+  }
+
+  .topNavLink {
+    font-size: 13px;
+  }
+
+  .grid {
+    column-count: 1;
+    column-gap: 14px;
+  }
+
+  .grid > .cardReveal {
+    margin-bottom: 14px;
+  }
+
+  .projectMediaGrid {
+    gap: 16px;
+    margin-top: 44px;
+  }
+
+  .projectLightboxImage {
+    border-radius: 0;
+  }
+
+  .projectLightbox {
+    cursor: default;
+  }
+
+  .projectLightboxNav {
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+
+  .projectLightboxNavPrev {
+    left: 10px;
+  }
+
+  .projectLightboxNavNext {
+    right: 10px;
+  }
+}

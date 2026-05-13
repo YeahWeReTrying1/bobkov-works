@@ -1,0 +1,337 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #111;
+  --muted: #666;
+  --line: #e4e6ea;
+  --primary: #111;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: "Google Sans", Inter, Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+.adminRoot {
+  width: min(1280px, 100vw - 20px);
+  margin: 24px auto 64px;
+  display: grid;
+  gap: 14px;
+}
+
+.adminTop {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.adminTop h1 { margin: 0; font-size: 30px; }
+.adminTop p { margin: 6px 0 0; color: var(--muted); }
+
+.ghostLink {
+  color: #333;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.adminCard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.tokenRow { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+
+input, textarea, select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: #fff;
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--primary);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.status { margin-top: 10px; border-radius: 10px; padding: 10px 12px; border: 1px solid var(--line); }
+.status.ok { background: #edf8ef; border-color: #cde8d3; }
+.status.warn { background: #fff7eb; border-color: #ffdfb8; }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab { background: #fff; color: #555; border: 1px solid var(--line); }
+.tab.active { background: #111; color: #fff; border-color: #111; }
+
+.muted { margin-top: 0; color: var(--muted); }
+.projectList { display: grid; gap: 10px; }
+
+.projectCard {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+.projectCard.dragging { opacity: 0.5; }
+
+.previewWrap {
+  width: 110px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f1f2f4;
+}
+
+.previewWrap[draggable="true"] {
+  cursor: grab;
+}
+
+.previewWrap[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.previewWrap[draggable="true"]:focus-visible {
+  outline: 2px solid #1a6c33;
+  outline-offset: 2px;
+}
+.preview { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.projectMeta h3 { margin: 0 0 4px; }
+.projectMeta p { margin: 0 0 8px; color: var(--muted); }
+
+.chipRow { display: flex; gap: 6px; }
+.chip { font-size: 12px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: #555; }
+.chip.green { color: #1a6c33; border-color: #b9e1c4; background: #edf8ef; }
+.chip.red { color: #8b2020; border-color: #e8bcbc; background: #fff1f1; }
+
+.projectActions { display: flex; flex-direction: column; gap: 6px; min-width: 190px; }
+.projectActions button { width: 100%; }
+.projectActions > * { cursor: default; }
+
+.filePick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #121212;
+  background: #121212;
+  color: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.filePick.soft {
+  background: #fff;
+  color: #222;
+  border-color: var(--line);
+}
+.filePick input { display: none; }
+
+.formGrid { display: grid; gap: 10px; }
+
+.projectEditorCard {
+  border: 1px solid #d8dde7;
+}
+
+.editorTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.editorTop h2 {
+  margin: 0;
+}
+
+.editorMediaList {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+}
+
+.editorMediaList h3 {
+  margin: 0;
+}
+
+.mediaRows {
+  display: grid;
+  gap: 10px;
+}
+
+.mediaRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: grab;
+}
+
+.mediaRow.dragging {
+  opacity: 0.55;
+}
+
+.mediaThumb {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f1f2f4;
+}
+
+.mediaThumb img,
+.mediaThumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mediaEdit {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.mediaEdit p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.mediaEditActions {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.mediaEditActions .filePick {
+  flex: 1;
+}
+
+.dangerButtonInline {
+  flex: 0 0 auto;
+  border: 1px solid #efb1b1;
+  background: #fff3f3;
+  color: #7a1a1a;
+  padding: 10px 12px;
+}
+
+/* Удаление проекта — явно красная кнопка */
+.btnDeleteProject {
+  background: #c62828 !important;
+  color: #fff !important;
+  border: 1px solid #8e0000 !important;
+}
+
+.btnDeleteProject:hover {
+  filter: brightness(1.06);
+}
+
+.editorFooter {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .adminRoot {
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .adminTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .adminTop h1 {
+    font-size: clamp(24px, 6vw, 30px);
+  }
+
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .tab {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .projectCard {
+    grid-template-columns: 1fr;
+  }
+  .previewWrap { width: 100%; height: 180px; }
+  .projectActions { min-width: 0; }
+  .mediaRow { grid-template-columns: 1fr; }
+  .mediaThumb { height: 180px; }
+}
+
+@media (max-width: 700px) {
+  .adminCard {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .tokenRow {
+    grid-template-columns: 1fr;
+  }
+
+  .tokenRow button {
+    width: 100%;
+  }
+
+  .projectActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .projectActions .filePick {
+    grid-column: 1 / -1;
+  }
+
+  .filePick,
+  .filePick.soft {
+    width: 100%;
+  }
+
+  .editorTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .editorFooter {
+    justify-content: stretch;
+  }
+
+  .editorFooter button {
+    width: 100%;
+  }
+
+  .mediaEditActions {
+    flex-direction: column;
+  }
+}

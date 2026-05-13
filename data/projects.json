@@ -1,0 +1,452 @@
+[
+  {
+    "id": "551b3297-61d0-4a98-a7b2-9dab86a4d1be",
+    "slug": "mamm-identity",
+    "title": "«Мультимедиа Арт Музей»",
+    "description": "Крупнейший российский музей фотографии и мультимедийного искусства. Ежегодно представляет более ста выставочных проектов в России и за рубежом.\n",
+    "tag": "айдентика",
+    "preview": "/uploads/a73aaf88-ea90-48ef-8c7f-82fed6378f46.mp4",
+    "detailsEnabled": true,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "619f3677-0a25-41f1-8f16-484893eadbcb",
+        "kind": "image",
+        "src": "/uploads/1194f9f6-b43c-406b-b533-288558f60c48.jpg",
+        "caption": ""
+      },
+      {
+        "id": "2167d5c9-e34b-4a96-af84-b354bb24e149",
+        "kind": "image",
+        "src": "/uploads/12b651bb-6401-41b3-ac00-bff0e211b41d.png",
+        "caption": ""
+      },
+      {
+        "id": "805524be-c25a-4576-821f-f764e1dc3223",
+        "kind": "image",
+        "src": "/uploads/d3ef70d8-646a-4ac8-846b-0def1f3b4117.png",
+        "caption": ""
+      },
+      {
+        "id": "b8a7b02b-e84c-4ff4-94dd-2c9e9989df13",
+        "kind": "image",
+        "src": "/uploads/189377c9-21f3-407f-af47-564ac608076d.png",
+        "caption": ""
+      },
+      {
+        "id": "3bf52bd6-ca2a-47eb-9c98-294850a10059",
+        "kind": "image",
+        "src": "/uploads/f6a60130-d755-42de-9dba-58844c883b6a.jpg",
+        "caption": ""
+      }
+    ],
+    "mediaAppend": {
+      "kind": "video",
+      "src": "/uploads/6075e90f-1fb6-4fef-b55e-38c986c0d7c8.mp4",
+      "caption": ""
+    },
+    "manualOrder": 1,
+    "richText": "Идея идентичности музея исходит из его архитектурных особенностей и функционального предназначения – перемещение посетителя музея осуществляется по лестницам сменяя этаж за этажом, за счет пролетов зритель может видеть, что происходит на разных этажах музея, а также лицезреть арт-объекты прямо с открытых пространств разных этажей, меняя тем самым фокус своего восприятия. «Кто определяет сегодня границы того, что такое искусство? — В 1917 году Марсель Дюшан установил свой знаменитый “Фонтан” в нью-йоркском музее. И это была концептуальная революция. Сушилки для тарелок и писсуар обрели в музейном пространстве художественные смыслы. Этот радикальный жест вскрыл символическую природу искусства, нашу способность видеть другие смыслы, которые приобретает предмет, попадая в музейное пространство. Так он проявил силу контекста, который влияет на смысл текста. Центральная фигура в мире искусства — художник». \nМетафорой идентичности становится появление особого взгляда в музее, взгляда зрителя на искусство. Постоянное изменение взгляда на искусство будь то внутри музея, переходя с одного этажа на другой, или меняя свое восприятие посредством изучения объекта созерцания меняется вид и суть самого произведения в наших глазах. Изменчивость, смена форматов пересекается с мультимедийностью самого музея, в музее каждый раз проходят новые выставки и нет постоянной экспозиции, что подчеркивает постоянную динамичность в диалоге со зрителем. \nПредложенный концептуальный замысел помогает раскрыть постоянно меняющийся логотип, он же становится главным стилеобразующим элементом новой айдентики. Основой для фирменного знака является всем известная аббревиатура музея “МАММ”, которая имеет характерное начертании написанное гельветикой. Эта простая статичная форма трансформируется с появлением зрителя, показывая отличность его взглядов, как он видит музей и искусство в нем. Постоянно изменяющийся логотип это про время, в которое мы живём, где ценным качеством является возможность адаптироваться к быстро меняющимся условиям, при этом не теряя свою идентичность. Надо оставаться гибким чтобы успеть за ритмом современности. ",
+    "structuredBlocks": []
+  },
+  {
+    "id": "5f64b887-dd48-4268-97f9-c1a305f7496a",
+    "slug": "mamm-posters",
+    "title": "Плакаты МАММ ",
+    "description": "Плакаты ",
+    "tag": "плакаты",
+    "preview": "/uploads/138028cd-a7d8-444e-95fe-1e04eeaab150.png",
+    "detailsEnabled": false,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "f0e63a5e-dda9-4c5a-a741-4da2ec33e2ab",
+        "kind": "image",
+        "src": "/uploads/8e4ea241-1bce-4570-84e5-0a6a99d2a68b.png",
+        "caption": ""
+      },
+      {
+        "id": "167bae0c-a85d-4bb1-a69f-bd68eb294dfa",
+        "kind": "image",
+        "src": "/uploads/fb736e98-71e6-49e8-a695-191b6ac4bde4.png",
+        "caption": ""
+      },
+      {
+        "id": "a9724c68-7a8a-4896-b36d-4bac2a736409",
+        "kind": "image",
+        "src": "/uploads/075a6958-751e-4ea0-8386-fff19597938a.png",
+        "caption": ""
+      },
+      {
+        "id": "87fb2ef3-8923-4ed3-ad0e-6f03d66b847e",
+        "kind": "image",
+        "src": "/uploads/d283727e-761b-4e89-bcf6-4e30079ad404.png",
+        "caption": ""
+      }
+    ],
+    "mediaAppend": {
+      "kind": "image",
+      "src": "/uploads/54deea6f-24a3-4113-8caa-5bb70621e43c.jpg",
+      "caption": ""
+    },
+    "richText": "",
+    "structuredBlocks": [],
+    "manualOrder": 0
+  },
+  {
+    "id": "f70d2dbb-eabb-42de-a448-f0e0fea11f4f",
+    "slug": "uzelok-anima-logo",
+    "title": "Узелок",
+    "description": "Логотип приложения для знакомств",
+    "tag": "логотипы",
+    "preview": "/uploads/c78182ba-c521-4269-b97c-a3a0a08fe021.mp4",
+    "detailsEnabled": false,
+    "published": true,
+    "archived": false,
+    "media": [],
+    "richText": "",
+    "structuredBlocks": [],
+    "manualOrder": 3
+  },
+  {
+    "id": "ee82ac7b-b7a6-4240-8443-9dcede57d1b7",
+    "slug": "zagruzki-vosstanovlenie",
+    "title": "Загрузки (восстановление после сброса JSON)",
+    "description": "Все файлы из этой сессии, которые лежат в public/uploads, но потеряли привязку в projects.json. Разнеси их по нужным проектам в админке и удали этот черновик.",
+    "tag": "эксперименты",
+    "preview": "/uploads/0519dd24-3b52-45a2-b776-1207b7e89dcb.jpg",
+    "detailsEnabled": true,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "6b5ca578-1fb7-4e74-abb8-c64503ba9aef",
+        "kind": "image",
+        "src": "/uploads/0519dd24-3b52-45a2-b776-1207b7e89dcb.jpg",
+        "caption": ""
+      },
+      {
+        "id": "aa9e7ca0-30e2-449b-89b9-682e3e35d2b9",
+        "kind": "image",
+        "src": "/uploads/12595412-6ded-44ea-aa99-4f904e71225d.png",
+        "caption": ""
+      },
+      {
+        "id": "0fdd2e94-7150-4d9a-9491-fdcfeae891bf",
+        "kind": "image",
+        "src": "/uploads/1add26f0-3c36-45ea-bc70-0319f1cb3317.jpg",
+        "caption": ""
+      },
+      {
+        "id": "1887eb73-07ea-416f-8eaa-da4490b7d0c1",
+        "kind": "image",
+        "src": "/uploads/4046e115-3a9e-45ee-a8ab-a6c88e8ec63d.jpg",
+        "caption": ""
+      },
+      {
+        "id": "1b94e316-e7a8-4721-85d4-b62156cb8816",
+        "kind": "image",
+        "src": "/uploads/4bb4aa47-b53b-4c69-8d54-f9340bf76d43.png",
+        "caption": ""
+      },
+      {
+        "id": "0fb87096-8752-4995-a17a-cd61e4f0fcb7",
+        "kind": "image",
+        "src": "/uploads/501b046d-c5fa-42f4-8700-f80fc4677343.jpg",
+        "caption": ""
+      },
+      {
+        "id": "0cc80a9a-f9f8-475f-af2f-a2b6f9478ca6",
+        "kind": "image",
+        "src": "/uploads/6d9e25e5-e599-4fd0-8ad9-2d3e2249baaf.png",
+        "caption": ""
+      },
+      {
+        "id": "7ed1c7df-b511-434b-8087-be9bb9745822",
+        "kind": "image",
+        "src": "/uploads/6dbf531b-5834-48d8-8ffa-388e6c5ed567.jpg",
+        "caption": ""
+      },
+      {
+        "id": "af982bee-d9f3-4bb3-b6da-630c78b20741",
+        "kind": "image",
+        "src": "/uploads/84012ded-e9fb-4380-ba73-cc0a275781ea.png",
+        "caption": ""
+      },
+      {
+        "id": "c9a92a19-f7ae-4c86-a00b-8d750e121ceb",
+        "kind": "image",
+        "src": "/uploads/a13911fa-899f-40f2-b8bd-baf9b51812a6.jpg",
+        "caption": ""
+      },
+      {
+        "id": "2097db00-b7f7-4d20-994c-1599ed0d6def",
+        "kind": "image",
+        "src": "/uploads/a2f2b5a8-d46a-4701-9907-2dd2d6d7cea9.jpg",
+        "caption": ""
+      },
+      {
+        "id": "4e65e1b6-8f96-4929-a2c5-78b3198b7cf5",
+        "kind": "image",
+        "src": "/uploads/a681f944-9392-49d5-9a75-23f2c3a21e49.png",
+        "caption": ""
+      },
+      {
+        "id": "0089188c-3af2-4492-a815-34bd0487bf1e",
+        "kind": "image",
+        "src": "/uploads/ac43bd93-b843-4b29-a600-36405a32259f.jpg",
+        "caption": ""
+      },
+      {
+        "id": "8dd8e9cb-0ea5-42b5-ade9-a9cf54e112b7",
+        "kind": "image",
+        "src": "/uploads/b2bb6eb8-6ef8-4ea2-a0db-f688d694f16a.jpg",
+        "caption": ""
+      },
+      {
+        "id": "95959c27-b7a2-4630-a8f3-c6ba367d3f79",
+        "kind": "image",
+        "src": "/uploads/b65a9f0a-c53b-4bee-a46f-982968016dfe.png",
+        "caption": ""
+      },
+      {
+        "id": "7ad3aa55-8d58-46ce-b7a4-168c4a4778be",
+        "kind": "image",
+        "src": "/uploads/bfc04921-9d24-4ea6-aea3-06a3a9e1bf76.png",
+        "caption": ""
+      },
+      {
+        "id": "87bf6729-7f33-4f91-81ab-62717e04a50b",
+        "kind": "image",
+        "src": "/uploads/c6811c4d-f6d8-430a-adc5-ce1df7941c5c.jpg",
+        "caption": ""
+      },
+      {
+        "id": "0d25aeda-9040-49f4-a806-d17ae1c435ee",
+        "kind": "image",
+        "src": "/uploads/ddf74d25-6d64-46f3-9416-cc9557f67873.png",
+        "caption": ""
+      },
+      {
+        "id": "cc50d104-d1e2-449b-a96a-cbc197633ae5",
+        "kind": "image",
+        "src": "/uploads/df038e40-9ee8-4fd5-b462-4641c8f7fffa.png",
+        "caption": ""
+      },
+      {
+        "id": "5505fcf6-6b17-4d35-8bb0-463dce978391",
+        "kind": "image",
+        "src": "/uploads/e4787749-7fe8-423c-af4a-30d6e27106e8.jpg",
+        "caption": ""
+      }
+    ],
+    "richText": "",
+    "structuredBlocks": [],
+    "manualOrder": 2
+  },
+  {
+    "id": "be03851e-9afd-443d-a0ac-0a6284f569d2",
+    "slug": "",
+    "title": "",
+    "description": "",
+    "tag": "плакаты",
+    "preview": "/uploads/95a5a8d4-9f1b-4a6f-b7e6-e4e02f80cad7.png",
+    "detailsEnabled": false,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "adf4288a-3006-4f11-bd68-df594ac5089d",
+        "kind": "image",
+        "src": "/uploads/aec3fcbc-5436-47a5-afc5-fe7890f4bd72.png",
+        "caption": ""
+      },
+      {
+        "id": "cd252b2b-1e58-4b3c-bf6e-1b081e758aa1",
+        "kind": "image",
+        "src": "/uploads/9995a6b8-b1c4-4fc8-98b9-99e179c71d4a.png",
+        "caption": ""
+      },
+      {
+        "id": "48e51eae-0715-441a-ba40-5b99840d07b5",
+        "kind": "image",
+        "src": "/uploads/2d94397b-8793-4f4b-8051-79314dfd8d3b.png",
+        "caption": ""
+      },
+      {
+        "id": "94552e7c-832c-41de-8f2d-7d94b0c88e92",
+        "kind": "image",
+        "src": "/uploads/0ee7706f-c8ed-42e8-94cb-55ef749286cd.png",
+        "caption": ""
+      }
+    ],
+    "richText": "",
+    "structuredBlocks": [],
+    "mediaAppend": {
+      "kind": "image",
+      "src": "/uploads/092f0e2b-55a9-4c27-ae78-4c1de4c22e16.jpg",
+      "caption": ""
+    },
+    "manualOrder": 4
+  },
+  {
+    "id": "b88d6faf-c23a-4cac-b50f-e215ed6ee510",
+    "slug": "",
+    "title": "Презервативы",
+    "description": "",
+    "tag": "эксперименты",
+    "preview": "/uploads/835267f5-babc-4ff7-92ec-dbcb13e7f6d7.jpg",
+    "detailsEnabled": false,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "fc8d36a7-eed6-4ef0-8b94-2e012db7bae2",
+        "kind": "image",
+        "src": "/uploads/a21d8c7f-237e-443b-a31b-bc0a0115baf8.jpg",
+        "caption": ""
+      },
+      {
+        "id": "ddea4144-124c-48f9-92e0-f3edc1230f79",
+        "kind": "image",
+        "src": "/uploads/e3797f75-09f9-4925-8d8a-8953f1b7a989.jpg",
+        "caption": ""
+      },
+      {
+        "id": "a5a89030-84d7-41bc-bf67-d1b5b86d4abd",
+        "kind": "image",
+        "src": "/uploads/3b3f5105-00af-437f-9118-2eb7af467e6f.jpg",
+        "caption": ""
+      },
+      {
+        "id": "511b8c7e-baf6-4653-bdaf-1a01fb01bea1",
+        "kind": "image",
+        "src": "/uploads/1dd31a7c-5300-4b99-8437-6bd1d4a5b057.jpg",
+        "caption": ""
+      },
+      {
+        "id": "ee819353-42d9-4b7e-b17d-569e54c4cc2c",
+        "kind": "image",
+        "src": "/uploads/a503f513-8f72-4f35-8f36-2d8c903527bd.jpg",
+        "caption": ""
+      },
+      {
+        "id": "a14f8bf7-d061-40e1-8785-bff9ef05d862",
+        "kind": "image",
+        "src": "/uploads/23c0f903-a776-4ad9-b771-4828f679f41b.jpg",
+        "caption": ""
+      },
+      {
+        "id": "8018baf5-442c-4047-a146-424d4b249f1f",
+        "kind": "image",
+        "src": "/uploads/2308e314-2f10-448c-a6f4-7d7fed3f1a9d.jpg",
+        "caption": ""
+      },
+      {
+        "id": "bf850c77-5f31-42ce-b7f3-6300e99166a1",
+        "kind": "image",
+        "src": "/uploads/6187233e-36ba-4efb-810c-67da9d856278.jpg",
+        "caption": ""
+      },
+      {
+        "id": "3451ce0f-7124-42ed-a458-2777eabb9c91",
+        "kind": "image",
+        "src": "/uploads/5691134f-5d6a-4734-8298-340c83122d17.jpg",
+        "caption": ""
+      },
+      {
+        "id": "64ea5b0a-b0c0-47fd-a3e1-a12bf7c2cfa2",
+        "kind": "image",
+        "src": "/uploads/7a1b44a4-feea-40a8-b4a5-b518bdae5f46.jpg",
+        "caption": ""
+      },
+      {
+        "id": "211a2ff2-25a5-478c-ba11-9883cf8205f9",
+        "kind": "image",
+        "src": "/uploads/95c7b93a-3feb-4ff3-80db-ebcb28fa5efe.jpg",
+        "caption": ""
+      }
+    ],
+    "richText": "",
+    "structuredBlocks": []
+  },
+  {
+    "id": "709c5aa2-0667-4275-9544-171565e4eeb6",
+    "slug": "",
+    "title": "Sociophobic as fuck T-Shirt",
+    "description": "",
+    "tag": "эксперименты",
+    "preview": "/uploads/76f70aa8-fa76-48f8-ab25-64b93b71987c.jpg",
+    "detailsEnabled": false,
+    "published": true,
+    "archived": false,
+    "media": [],
+    "richText": "",
+    "structuredBlocks": []
+  },
+  {
+    "id": "6c6a9006-a0c4-459f-bb62-96567a27bb78",
+    "slug": "",
+    "title": "ink",
+    "description": "",
+    "tag": "айдентика",
+    "preview": "/uploads/e52604f8-e046-4e63-bf2e-1192f3965158.jpg",
+    "detailsEnabled": true,
+    "published": true,
+    "archived": false,
+    "media": [
+      {
+        "id": "92637db4-fa02-4a61-8ef4-b327dc445b83",
+        "kind": "image",
+        "src": "/uploads/2e5931b9-cd71-4616-9094-94f7c59f805b.jpg",
+        "caption": ""
+      },
+      {
+        "id": "0d96be5f-8aba-4103-9498-798f2ae0b2cf",
+        "kind": "image",
+        "src": "/uploads/a3236890-f9e0-466e-a886-8f855f01e435.jpg",
+        "caption": ""
+      },
+      {
+        "id": "b506235b-79c5-491e-8428-38fff858b908",
+        "kind": "image",
+        "src": "/uploads/73589260-9dc9-4a4e-b3b7-548435f1bf89.jpg",
+        "caption": ""
+      },
+      {
+        "id": "7f8c7455-970b-4e1d-9abc-93b8a622419e",
+        "kind": "image",
+        "src": "/uploads/734e41ac-c855-42e9-9bd5-1044cfb08e36.jpg",
+        "caption": ""
+      },
+      {
+        "id": "bb93ba3e-366f-461f-96e3-2aca823a1c86",
+        "kind": "image",
+        "src": "/uploads/8c2a01fb-cd83-4f3d-bac3-79ff1629f4ca.jpg",
+        "caption": ""
+      },
+      {
+        "id": "f88808a0-e98a-40ad-83d1-f24211eb8d85",
+        "kind": "image",
+        "src": "/uploads/9e0c028d-2dd5-4a4f-bdb5-236eb752bb0e.jpg",
+        "caption": ""
+      },
+      {
+        "id": "6a0e157c-1f43-49b5-b224-c39501ef4b7e",
+        "kind": "image",
+        "src": "/uploads/57c90441-982a-4470-be5f-d9bf0d5d8a17.jpg",
+        "caption": ""
+      },
+      {
+        "id": "f8434e20-1357-4a92-9bdf-c9a5e9144fde",
+        "kind": "image",
+        "src": "/uploads/dfca804a-4be4-45f2-95ce-9117f065aeeb.jpg",
+        "caption": ""
+      }
+    ],
+    "richText": "",
+    "structuredBlocks": []
+  }
+]
