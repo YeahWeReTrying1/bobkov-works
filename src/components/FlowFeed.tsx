@@ -35,7 +35,6 @@ type Props = {
   isNavigating: boolean;
   navTargetSlug: string | null;
   prefetchProject: (slug: string) => void;
-  openProjectFromTitle: (event: MouseEvent<HTMLAnchorElement>, slug: string) => void;
 };
 
 export function FlowFeed({
@@ -43,8 +42,7 @@ export function FlowFeed({
   showCaptions,
   isNavigating,
   navTargetSlug,
-  prefetchProject,
-  openProjectFromTitle
+  prefetchProject
 }: Props) {
   const measureRef = useRef<HTMLDivElement>(null);
   const [wide, setWide] = useState(false);
@@ -197,6 +195,7 @@ export function FlowFeed({
         {projects.map((project, i) => {
           const box = boxes[i];
           const off = offsets[project.id] || { dx: 0, dy: 0 };
+          const canOpenProject = project.detailsEnabled && project.slug.trim().length > 0;
           const hostW = wide ? outer.w : (mobileLayout?.hostW ?? outer.w);
           const hostStyle = box
             ? {
@@ -229,19 +228,17 @@ export function FlowFeed({
                   <FlowCardMedia
                     project={project}
                     prefetchProject={prefetchProject}
-                    openProjectFromTitle={openProjectFromTitle}
                     tilePx={wide ? undefined : (mobileLayout?.tile ?? 121)}
                   />
                   {showCaptions ? (
                     <div className="cardBody flowCardBody">
-                      {project.detailsEnabled ? (
+                      {canOpenProject ? (
                         <strong className="flowCardTitle">
                           <Link
                             href={`/projects/${project.slug}`}
                             prefetch
                             onMouseEnter={() => prefetchProject(project.slug)}
                             className="flowCardTitleLink"
-                            onClick={(event) => openProjectFromTitle(event, project.slug)}
                           >
                             {project.title}
                           </Link>

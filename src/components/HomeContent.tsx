@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type MouseEvent, startTransition, useMemo, useState, useTransition } from "react";
+import { useMemo, useState } from "react";
 import { CardReveal } from "@/components/CardReveal";
 import { FlowFeed } from "@/components/FlowFeed";
 import { ProjectMediaCarousel } from "@/components/ProjectMediaCarousel";
@@ -45,8 +45,6 @@ export function HomeContent({ projects }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showCaptions, setShowCaptions] = useState(true);
-  const [navTargetSlug, setNavTargetSlug] = useState<string | null>(null);
-  const [, startTransition] = useTransition();
 
   const activeTag = useMemo(() => {
     const rawTag = searchParams.get("tag") || "flow";
@@ -62,29 +60,8 @@ export function HomeContent({ projects }: Props) {
 
   const isFlow = activeTag === "flow";
 
-  const isModifiedClick = (event: MouseEvent<HTMLAnchorElement>) =>
-    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
-
   const prefetchProject = (slug: string) => {
     void router.prefetch(`/projects/${slug}`);
-  };
-
-  const openProjectFromTitle = (event: MouseEvent<HTMLAnchorElement>, slug: string) => {
-    if (isModifiedClick(event)) return;
-    event.preventDefault();
-    if (!isFlow) {
-      router.push(`/projects/${slug}`);
-      return;
-    }
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      router.push(`/projects/${slug}`);
-      return;
-    }
-
-    setNavTargetSlug(slug);
-    startTransition(() => {
-      router.push(`/projects/${slug}`);
-    });
   };
 
   const renderCaptionToggle = () => (
@@ -107,7 +84,8 @@ export function HomeContent({ projects }: Props) {
     </button>
   );
 
-  const isNavigating = navTargetSlug !== null;
+  const isNavigating = false;
+  const navTargetSlug: string | null = null;
 
   const gridClass = ["grid", isFlow ? "flowGrid" : "", isNavigating ? "gridIsNavigating" : ""]
     .filter(Boolean)
@@ -141,7 +119,6 @@ export function HomeContent({ projects }: Props) {
               isNavigating={isNavigating}
               navTargetSlug={navTargetSlug}
               prefetchProject={prefetchProject}
-              openProjectFromTitle={openProjectFromTitle}
             />
           </div>
         ) : (
@@ -161,6 +138,7 @@ export function HomeContent({ projects }: Props) {
                 >
                   <article className="card">
                     {(() => {
+                      const canOpenProject = project.detailsEnabled && project.slug.trim().length > 0;
                       const carouselMedia = [
                         {
                           id: `${project.id}-preview`,
@@ -169,13 +147,12 @@ export function HomeContent({ projects }: Props) {
                         },
                         ...project.media.filter((item) => item.src !== project.preview)
                       ];
-                      if (project.detailsEnabled) {
+                      if (canOpenProject) {
                         return (
                           <Link
                             href={`/projects/${project.slug}`}
                             prefetch
                             onMouseEnter={() => prefetchProject(project.slug)}
-                            onClick={(event) => openProjectFromTitle(event, project.slug)}
                           >
                             {isVideoPreview(project.preview) ? (
                               <video
@@ -213,14 +190,13 @@ export function HomeContent({ projects }: Props) {
                     })()}
                     {showCaptions ? (
                       <div className="cardBody">
-                        {project.detailsEnabled ? (
+                        {project.detailsEnabled && project.slug.trim().length > 0 ? (
                           <strong className="cardTitle">
                             <Link
                               href={`/projects/${project.slug}`}
                               prefetch
                               onMouseEnter={() => prefetchProject(project.slug)}
                               className="cardTitleLink"
-                              onClick={(event) => openProjectFromTitle(event, project.slug)}
                             >
                               {project.title}
                             </Link>

@@ -61,7 +61,7 @@ type Props = {
 export async function generateStaticParams() {
   const projects = await getProjects();
   return projects
-    .filter((item) => item.published && !item.archived && item.detailsEnabled)
+    .filter((item) => item.published && !item.archived && item.detailsEnabled && item.slug.trim().length > 0)
     .map((project) => ({ slug: project.slug }));
 }
 
@@ -71,7 +71,7 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const projects = await getProjects();
   const feed = sortProjectsForFeed(
-    projects.filter((item) => item.published && !item.archived && item.detailsEnabled)
+    projects.filter((item) => item.published && !item.archived && item.detailsEnabled && item.slug.trim().length > 0)
   );
   const currentIndex = feed.findIndex((item) => item.slug === slug);
   const project = currentIndex >= 0 ? feed[currentIndex] : null;

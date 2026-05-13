@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent } from "react";
 import { withBasePath } from "@/lib/sitePath";
 import type { Project } from "@/lib/types";
 
@@ -12,12 +11,11 @@ function isVideoPreview(src: string) {
 type Props = {
   project: Project;
   prefetchProject: (slug: string) => void;
-  openProjectFromTitle: (event: MouseEvent<HTMLAnchorElement>, slug: string) => void;
   /** Мобилка: сторона квадрата превью в px (по умолчанию 121). */
   tilePx?: number;
 };
 
-export function FlowCardMedia({ project, prefetchProject, openProjectFromTitle, tilePx = 121 }: Props) {
+export function FlowCardMedia({ project, prefetchProject, tilePx = 121 }: Props) {
   const media = isVideoPreview(project.preview) ? (
     <video
       className="flowCardMedia"
@@ -33,12 +31,12 @@ export function FlowCardMedia({ project, prefetchProject, openProjectFromTitle, 
     <img className="flowCardMedia" src={withBasePath(project.preview)} alt="" />
   );
 
-  const clip = project.detailsEnabled ? (
+  const canOpenProject = project.detailsEnabled && project.slug.trim().length > 0;
+  const clip = canOpenProject ? (
     <Link
       href={`/projects/${project.slug}`}
       prefetch
       onMouseEnter={() => prefetchProject(project.slug)}
-      onClick={(event) => openProjectFromTitle(event, project.slug)}
       className="flowCardMediaLink"
     >
       {media}
