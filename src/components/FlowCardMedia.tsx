@@ -35,7 +35,7 @@ export function FlowCardMedia({ project, prefetchProject, tilePx = 121 }: Props)
   const clip = canOpenProject ? (
     <Link
       href={`/projects/${project.slug}`}
-      prefetch
+      prefetch={false}
       onMouseEnter={() => prefetchProject(project.slug)}
       className="flowCardMediaLink"
     >

@@ -297,14 +297,9 @@ a {
   overflow: visible;
 }
 
-.flowMosaicCardHostWide {
-  touch-action: none;
-  user-select: none;
-  cursor: grab;
-}
-
-.flowMosaicCardHostWide:active {
-  cursor: grabbing;
+/* Не блокировать тапы по ссылкам (в отличие от touch-action: none при drag). */
+.flowMosaicCardHost {
+  touch-action: manipulation;
 }
 
 .flowMosaicRootMobile {
