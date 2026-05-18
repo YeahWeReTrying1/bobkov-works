@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { withBasePath } from "@/lib/sitePath";
+import { FLOW_CARD_INNER_PX } from "@/lib/flowMosaicLayout";
 import type { Project } from "@/lib/types";
 
 function isVideoPreview(src: string) {
@@ -11,11 +12,11 @@ function isVideoPreview(src: string) {
 type Props = {
   project: Project;
   prefetchProject: (slug: string) => void;
-  /** Мобилка: сторона квадрата превью в px (по умолчанию 121). */
+  /** Мобилка: сторона квадрата превью в px (по умолчанию FLOW_CARD_INNER_PX). */
   tilePx?: number;
 };
 
-export function FlowCardMedia({ project, prefetchProject, tilePx = 121 }: Props) {
+export function FlowCardMedia({ project, prefetchProject, tilePx = FLOW_CARD_INNER_PX }: Props) {
   const media = isVideoPreview(project.preview) ? (
     <video
       className="flowCardMedia"

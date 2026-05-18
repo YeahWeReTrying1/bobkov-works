@@ -1,13 +1,16 @@
-/** Десктоп: 12 колонок, зазор 8px, крайние колонки пустые. Мобилка: 2 колонки, зазор между ними 32px. */
+/** Десктоп: 12 колонок, зазор 8px, крайние колонки пустые. Мобилка: 2 колонки, зазор 32px; при ширине ≥480px — боковой inset 32|48|64 по seed. */
 
 const GAP = 8;
 /** Зазор между двумя колонками на мобилке (один промежуток). */
 const GAP_MOBILE = 32;
-const CARD = 121;
+/** Сторона квадрата превью (внутри outline), десктоп и потолок на мобилке. */
+export const FLOW_CARD_INNER_PX = 108;
+const CARD = FLOW_CARD_INNER_PX;
 /** Внешняя белая обводка 8px — в bbox для отступов между карточками. */
 const STROKE = 8;
 /** Полоса под заголовок в bbox десктопа; на мобилке добавляется к высоте контента, если подписи видны. */
-export const FLOW_MOSAIC_TITLE_BAND = 34;
+/** Полоса под превью в bbox: 32px до текста + запас под строку заголовка. */
+export const FLOW_MOSAIC_TITLE_BAND = 48;
 const SEED_PRIME = 0x9e3779b9;
 
 const COLS_DESKTOP = 12;
@@ -142,6 +145,11 @@ type MosaicCoreConfig = {
    * Для мобилки 2 колонки — чтобы не уезжали все превью в одну сторону.
    */
   balanceHalvesMinFraction?: number;
+  /**
+   * Мобилка: не ставить в колонку c, если последние столько размещений подряд были все в c
+   * (например 3 — не более трёх карт подряд в одной колонке).
+   */
+  maxConsecutiveInSameColumn?: number;
 };
 
 function computeFlowMosaicCore(
@@ -183,6 +191,29 @@ function computeFlowMosaicCore(
 
   const midX = containerWidth / 2;
   const balanceFrac = cfg.balanceHalvesMinFraction ?? 0;
+  const maxColStreak = cfg.maxConsecutiveInSameColumn;
+  const recentCols: number[] = [];
+
+  function nearestColIndex(left: number): number {
+    let bi = cfg.firstCol;
+    let bd = Infinity;
+    for (let c = cfg.firstCol; c <= maxColIndex; c++) {
+      const d = Math.abs(starts[c] - left);
+      if (d < bd) {
+        bd = d;
+        bi = c;
+      }
+    }
+    return bi;
+  }
+
+  function filterColsByStreak(cols: number[]): number[] {
+    if (!maxColStreak || cols.length === 0) return cols;
+    const filtered = cols.filter(
+      (c) => !(recentCols.length === maxColStreak && recentCols.every((x) => x === c))
+    );
+    return filtered.length ? filtered : cols;
+  }
 
   for (const idx of order) {
     let best: FlowMosaicBox | null = null;
@@ -191,15 +222,8 @@ function computeFlowMosaicCore(
 
     while (tries < maxTries && !best) {
       tries++;
-      const allowedCols = balancedColumnCandidates(
-        cfg.firstCol,
-        maxColIndex,
-        starts,
-        colW,
-        midX,
-        n,
-        rects,
-        balanceFrac
+      const allowedCols = filterColsByStreak(
+        balancedColumnCandidates(cfg.firstCol, maxColIndex, starts, colW, midX, n, rects, balanceFrac)
       );
       const ci = allowedCols[Math.floor(rng() * allowedCols.length)];
       const left = Math.min(starts[ci], Math.max(minLeft, maxRightExclusive - bw));
@@ -220,15 +244,8 @@ function computeFlowMosaicCore(
 
     if (!best) {
       let y = 0;
-      const sweepCols = balancedColumnCandidates(
-        cfg.firstCol,
-        maxColIndex,
-        starts,
-        colW,
-        midX,
-        n,
-        rects,
-        balanceFrac
+      const sweepCols = filterColsByStreak(
+        balancedColumnCandidates(cfg.firstCol, maxColIndex, starts, colW, midX, n, rects, balanceFrac)
       );
       outer: for (let sweep = 0; sweep < 600 && !best; sweep++) {
         for (const ci of sweepCols) {
@@ -252,15 +269,8 @@ function computeFlowMosaicCore(
     }
 
     if (!best) {
-      const fbCols = balancedColumnCandidates(
-        cfg.firstCol,
-        maxColIndex,
-        starts,
-        colW,
-        midX,
-        n,
-        rects,
-        balanceFrac
+      const fbCols = filterColsByStreak(
+        balancedColumnCandidates(cfg.firstCol, maxColIndex, starts, colW, midX, n, rects, balanceFrac)
       );
       const ncol = Math.max(1, fbCols.length);
       const row = Math.floor(idx / ncol);
@@ -280,6 +290,10 @@ function computeFlowMosaicCore(
       r: best.left + best.width,
       b: best.top + best.height
     });
+    if (maxColStreak) {
+      recentCols.push(nearestColIndex(best.left));
+      while (recentCols.length > maxColStreak) recentCols.shift();
+    }
   }
 
   return placed;
@@ -300,21 +314,33 @@ export function computeFlowMosaicLayout(n: number, containerWidth: number, seed:
   });
 }
 
-export function flowMobileColWidth(containerWidth: number): number {
-  return (containerWidth - (COLS_MOBILE - 1) * GAP_MOBILE) / COLS_MOBILE;
+export function flowMobileColWidth(layoutWidth: number): number {
+  return (layoutWidth - (COLS_MOBILE - 1) * GAP_MOBILE) / COLS_MOBILE;
+}
+
+/** С ≥480px: симметричный inset слева/справа из {32, 48, 64} по seed. */
+export function flowMobileContentInset(containerWidth: number, seed: string): number {
+  if (containerWidth < 480) return 0;
+  const opts = [32, 48, 64] as const;
+  return opts[hashSeed(`${seed}|flowInset`) % 3];
+}
+
+export function flowMobileLayoutInnerWidth(containerWidth: number, seed: string): number {
+  const inset = flowMobileContentInset(containerWidth, seed);
+  return Math.max(200, containerWidth - 2 * inset);
 }
 
 /**
- * Сторона квадрата превью (внутри outline) на мобилке: 2 колонки, зазор 32px (до 121px).
- * Небольшой запас под outline и субпиксель.
+ * Сторона квадрата превью (внутри outline) на мобилке: 2 колонки, зазор 32px (до FLOW_CARD_INNER_PX).
+ * `layoutWidth` — ширина полотна сетки (без боковых inset).
  */
-export function flowMobileCardInnerSize(containerWidth: number): number {
-  const cw = flowMobileColWidth(containerWidth);
+export function flowMobileCardInnerSize(layoutWidth: number): number {
+  const cw = flowMobileColWidth(layoutWidth);
   return Math.max(40, Math.min(CARD, Math.floor(cw - 2 * STROKE - 2)));
 }
 
-export function flowMobileItemOuterSize(containerWidth: number): { w: number; h: number } {
-  const inner = flowMobileCardInnerSize(containerWidth);
+export function flowMobileItemOuterSize(layoutWidth: number): { w: number; h: number } {
+  const inner = flowMobileCardInnerSize(layoutWidth);
   return {
     w: inner + 2 * STROKE,
     h: inner + 2 * STROKE + FLOW_MOSAIC_TITLE_BAND
@@ -325,8 +351,8 @@ export function flowMobileItemOuterSize(containerWidth: number): { w: number; h:
  * Bbox для раскладки мозаики на мобилке: только квадрат превью + outline (без полосы подписи),
  * чтобы вертикальный шаг строк совпадал с высотой картинки.
  */
-export function flowMobileMosaicItemOuter(containerWidth: number): { w: number; h: number } {
-  const inner = flowMobileCardInnerSize(containerWidth);
+export function flowMobileMosaicItemOuter(layoutWidth: number): { w: number; h: number } {
+  const inner = flowMobileCardInnerSize(layoutWidth);
   return {
     w: inner + 2 * STROKE,
     h: inner + 2 * STROKE
@@ -337,16 +363,21 @@ export function flowMobileMosaicItemOuter(containerWidth: number): { w: number; 
  * Мобилка: 2 колонки, зазор 32px; крайние колонки можно занимать; до 2 превью в ряд — через padX (не соприкасаются).
  */
 export function computeFlowMobileMosaicLayout(n: number, containerWidth: number, seed: string): FlowMosaicBox[] {
+  const innerW = flowMobileLayoutInnerWidth(containerWidth, seed);
+  const inset = flowMobileContentInset(containerWidth, seed);
   const verticalPadExtra = 2 + (hashSeed(`${seed}\nmobile|vpad`) % 5); /* 2…6 px к padY */
-  return computeFlowMosaicCore(n, containerWidth, `${seed}\nmobile`, {
+  const boxes = computeFlowMosaicCore(n, innerW, `${seed}\nmobile`, {
     cols: COLS_MOBILE,
     firstCol: 0,
-    maxRightExclusive: containerWidth,
-    itemOuter: flowMobileMosaicItemOuter(containerWidth),
+    maxRightExclusive: innerW,
+    itemOuter: flowMobileMosaicItemOuter(innerW),
     columnGap: GAP_MOBILE,
     verticalPadExtra,
-    balanceHalvesMinFraction: 0.3
+    balanceHalvesMinFraction: 0.3,
+    maxConsecutiveInSameColumn: 3
   });
+  if (inset === 0) return boxes;
+  return boxes.map((b) => ({ ...b, left: b.left + inset }));
 }
 
 /** `extraFooter` — например FLOW_MOSAIC_TITLE_BAND на мобилке при видимых подписях (подпись ниже bbox превью). */

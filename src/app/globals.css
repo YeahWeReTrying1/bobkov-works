@@ -80,7 +80,8 @@ a {
 }
 
 .tagRow > a.tagButton,
-.tagRow > .captionIosSwitch {
+.tagRow > .captionIosSwitch,
+.tagRow > .flowViewToggle {
   align-self: center;
   flex-shrink: 0;
 }
@@ -100,6 +101,61 @@ a {
   line-height: 1;
   color: #8a8a8a;
   font-weight: 400;
+}
+
+.flowViewToggle {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+  margin-right: 4px;
+  border-radius: 8px;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.flowViewBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 34px;
+  height: calc(var(--tag-row-control-h) - 4px);
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #8a8a8a;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.flowViewBtn:hover {
+  color: #111;
+}
+
+.flowViewBtnActive {
+  color: #000;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.flowViewBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flowPileRoot {
+  position: relative;
+  width: 100%;
+  min-height: calc(100dvh - 96px);
+  overflow: visible;
+}
+
+.grid.flowPileGrid {
+  min-height: 0;
 }
 
 .tagButton:hover {
@@ -314,13 +370,13 @@ a {
 }
 
 .grid.flowGrid .flowMosaicRootDesktop .flowCardFrame {
-  width: 121px;
-  max-width: 121px;
+  width: 108px;
+  max-width: 108px;
 }
 
 .grid.flowGrid .flowMosaicRootDesktop .flowCardMediaClip {
-  width: 121px;
-  height: 121px;
+  width: 108px;
+  height: 108px;
   aspect-ratio: auto;
 }
 
@@ -376,15 +432,23 @@ a {
   background-color: var(--flow-page-bg);
 }
 
+/* Портрет: десктоп — эталон 1920×1080, размер 1122×1170, позиция X=579 Y=72.
+   Мобилка — эталон 360×800, размер 572×619, позиция X=-31 Y=181. Координаты и размеры масштабируются пропорционально vw/vh. */
 .flowBackdropLayer {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-position: center bottom;
-  /* Портрет: фиксированная высота ~1200px, низ к краю экрана, по горизонтали по центру */
-  background-size: auto 1200px;
+  background-size: calc(572 * 100vw / 360) calc(619 * 100vw / 360);
+  background-position: calc(-31 * 100vw / 360) calc(181 * 100vh / 800);
   background-color: transparent;
   transform: none;
+}
+
+@media (min-width: 900px) {
+  .flowBackdropLayer {
+    background-size: calc(1122 * 100vw / 1920) calc(1170 * 100vw / 1920);
+    background-position: calc(579 * 100vw / 1920) calc(72 * 100vh / 1080);
+  }
 }
 
 .flowBackdropLayerBase {
@@ -446,7 +510,7 @@ a {
   align-items: center;
 }
 
-/* 8px белая обводка снаружи (outline), не влияет на размер 121×121 */
+/* 8px белая обводка снаружи (outline), не влияет на размер 108×108 */
 .flowCardFrame {
   width: 100%;
   outline: 8px solid #ffffff;
@@ -476,7 +540,7 @@ a {
 }
 
 .flowCardBody {
-  padding: 28px 0 0;
+  padding: 32px 0 0;
   margin: 0;
   text-align: center;
 }

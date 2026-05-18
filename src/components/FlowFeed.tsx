@@ -6,10 +6,12 @@ import { CardReveal } from "@/components/CardReveal";
 import {
   computeFlowMosaicLayout,
   computeFlowMobileMosaicLayout,
+  FLOW_CARD_INNER_PX,
   FLOW_MOSAIC_TITLE_BAND,
   flowItemOuterSize,
   flowMobileCardInnerSize,
   flowMobileItemOuterSize,
+  flowMobileLayoutInnerWidth,
   flowMosaicContentHeight,
   type FlowMosaicBox
 } from "@/lib/flowMosaicLayout";
@@ -72,9 +74,10 @@ export function FlowFeed({
         setBoxes(next);
         setH(flowMosaicContentHeight(next, footerReserve));
       } else {
+        const innerW = flowMobileLayoutInnerWidth(w, seed);
         setMobileLayout({
-          tile: flowMobileCardInnerSize(w),
-          hostW: flowMobileItemOuterSize(w).w
+          tile: flowMobileCardInnerSize(innerW),
+          hostW: flowMobileItemOuterSize(innerW).w
         });
         const next = computeFlowMobileMosaicLayout(projects.length, w, seed);
         setBoxes(next);
@@ -146,7 +149,7 @@ export function FlowFeed({
                   <FlowCardMedia
                     project={project}
                     prefetchProject={prefetchProject}
-                    tilePx={wide ? undefined : (mobileLayout?.tile ?? 121)}
+                    tilePx={wide ? undefined : (mobileLayout?.tile ?? FLOW_CARD_INNER_PX)}
                   />
                   {showCaptions ? (
                     <div className="cardBody flowCardBody">

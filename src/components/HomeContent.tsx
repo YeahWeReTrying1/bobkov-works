@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { CardReveal } from "@/components/CardReveal";
 import { FlowFeed } from "@/components/FlowFeed";
+import { FlowPileFeed } from "@/components/FlowPileFeed";
 import { ProjectMediaCarousel } from "@/components/ProjectMediaCarousel";
 import { SiteNav } from "@/components/SiteNav";
 import { displayTagLabel, projectMatchesNavTag } from "@/lib/tagDisplay";
@@ -60,8 +61,57 @@ export function HomeContent({ projects }: Props) {
 
   const isFlow = activeTag === "flow";
 
+  const flowLayout = useMemo(
+    () => (searchParams.get("view") === "pile" ? "pile" : "mosaic"),
+    [searchParams]
+  );
+
   const prefetchProject = (slug: string) => {
     void router.prefetch(`/projects/${slug}`);
+  };
+
+  const renderFlowLayoutToggle = () => {
+    const pile = flowLayout === "pile";
+    const mosaicParams = new URLSearchParams(searchParams.toString());
+    mosaicParams.delete("view");
+    const mosaicQs = mosaicParams.toString();
+    const mosaicHref = mosaicQs ? `/?${mosaicQs}` : "/";
+    const pileParams = new URLSearchParams(searchParams.toString());
+    pileParams.set("view", "pile");
+    const pileHref = `/?${pileParams.toString()}`;
+
+    return (
+      <div className="flowViewToggle" role="group" aria-label="Вид раскладки Flow">
+        <Link
+          href={mosaicHref}
+          className={`flowViewBtn ${!pile ? "flowViewBtnActive" : ""}`}
+          aria-current={!pile ? "page" : undefined}
+          title="Мозаика"
+        >
+          <span className="flowViewBtnIcon" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.2" />
+              <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.2" />
+              <rect x="2" y="10" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.2" />
+              <rect x="10" y="10" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+          </span>
+        </Link>
+        <Link
+          href={pileHref}
+          className={`flowViewBtn ${pile ? "flowViewBtnActive" : ""}`}
+          aria-current={pile ? "page" : undefined}
+          title="Куча на экране"
+        >
+          <span className="flowViewBtnIcon" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1.2" opacity="0.95" />
+              <rect x="7" y="7" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+          </span>
+        </Link>
+      </div>
+    );
   };
 
   const renderCaptionToggle = () => (
@@ -93,7 +143,16 @@ export function HomeContent({ projects }: Props) {
 
   return (
     <>
-      <SiteNav showTags activeTag={activeTag} tagLeading={renderCaptionToggle} />
+      <SiteNav
+        showTags
+        activeTag={activeTag}
+        tagLeading={() => (
+          <>
+            {isFlow ? renderFlowLayoutToggle() : null}
+            {renderCaptionToggle()}
+          </>
+        )}
+      />
       <main className={isFlow ? "flowMain" : "container"}>
         {isFlow ? (
           <div className="flowBackdrop" aria-hidden>
@@ -113,13 +172,23 @@ export function HomeContent({ projects }: Props) {
         {isFlow ? (
           <div className="flowMainInner">
             <h1 className="srOnly pageTitle">Flow</h1>
-            <FlowFeed
-              projects={visibleProjects}
-              showCaptions={showCaptions}
-              isNavigating={isNavigating}
-              navTargetSlug={navTargetSlug}
-              prefetchProject={prefetchProject}
-            />
+            {flowLayout === "pile" ? (
+              <FlowPileFeed
+                projects={visibleProjects}
+                showCaptions={showCaptions}
+                isNavigating={isNavigating}
+                navTargetSlug={navTargetSlug}
+                prefetchProject={prefetchProject}
+              />
+            ) : (
+              <FlowFeed
+                projects={visibleProjects}
+                showCaptions={showCaptions}
+                isNavigating={isNavigating}
+                navTargetSlug={navTargetSlug}
+                prefetchProject={prefetchProject}
+              />
+            )}
           </div>
         ) : (
           <>
